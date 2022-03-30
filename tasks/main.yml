@@ -1,2 +1,23 @@
 ---
-# tasks file for web_role
+- name: install apache package
+  package:
+    name: httpd
+    when: ansible_distribution == "Amazon"
+
+- name: updating package on ubuntu ans install apache
+  block:
+  - name: update packages
+    shell:
+    cmd: apt-get update
+
+  - name: install apache package
+    package:
+      name: apache2
+
+  - name: start apache service
+    service:
+      name: apache2
+      state: started
+      enabled: true
+
+  when: ansible_distribution == "Ubuntu"
