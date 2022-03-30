@@ -10,6 +10,12 @@
       name: httpd
       state: started
       enabled: true
+
+  - name: patching systems
+    shell:
+      cmd: yum -y update
+    notify: rebooting
+    
   when: ansible_distribution == "Amazon"
 
 - name: updating package on ubuntu ans install apache

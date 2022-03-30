@@ -1,2 +1,4 @@
 ---
 # handlers file for web_role
+- name: rebooting
+  reboot:
