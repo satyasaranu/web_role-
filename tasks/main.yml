@@ -4,7 +4,7 @@
   - name: installing httpd pkg
     package:
       name: httpd
-      
+
   - name: statring httpd service
     service:
       name: httpd
@@ -29,6 +29,6 @@
 
 - name: creating index.html
   template:
-    src: index.html
+    src: index.j2
     dest: /var/www/html/index.html
   
