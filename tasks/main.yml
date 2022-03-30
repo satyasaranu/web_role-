@@ -1,38 +1,7 @@
 ---
-- name: install and configure apache on RHEL systems
-  block:
-  - name: installing httpd pkg
-    package:
-      name: httpd
-
-  - name: statring httpd service
-    service:
-      name: httpd
-      state: started
-      enabled: true
-
-  - name: patching systems
-    shell:
-      cmd: yum -y update
-    notify: rebooting
-    
-  when: ansible_distribution == "Amazon"
-
-- name: updating package on ubuntu ans install apache
-  block:
-  - name: install apache package
-    package:
-      name: apache2
-
-  - name: start apache service
-    service:
-      name: apache2
-      state: started
-      enabled: true
-
-  when: ansible_distribution == "Ubuntu"
-
-
+- name: install and configure apache
+  include_tasks: "{{ ansible_distribution }}.yml"
+  
 - name: creating index.html
   template:
     src: index.j2

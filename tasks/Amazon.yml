@@ -1,0 +1,10 @@
+---
+- name: installing httpd pkg
+  package:
+    name: httpd
+
+- name: starting httpd service
+  service:
+    name: httpd
+    state: started
+    enabled: true
