@@ -1,7 +1,15 @@
 ---
-- name: install apache package
-  package:
-    name: httpd
+- name: install and configure apache on RHEL systems
+  block:
+  - name: installing httpd pkg
+    package:
+      name: httpd
+      
+  - name: statring httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
   when: ansible_distribution == "Amazon"
 
 - name: updating package on ubuntu ans install apache
@@ -17,3 +25,10 @@
       enabled: true
 
   when: ansible_distribution == "Ubuntu"
+
+
+- name: creating index.html
+  template:
+    src: index.html
+    dest: /var/www/html/index.html
+  
